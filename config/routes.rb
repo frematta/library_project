@@ -12,5 +12,8 @@ Rails.application.routes.draw do
     }
 
   get "/me", to: "users#me"
+  namespace :api do
+    resources :books
+  end
   match "*path", to: "application#preflight", via: :options
 end

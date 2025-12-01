@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchCurrentUser } from "../api/me";
+import LibrarianDashboard from "../components/LibrarianDashboard";
+import MemberDashboard from "../components/MemberDashboard";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -17,7 +19,7 @@ export default function Home() {
       }
     }
     loadUser();
-  }, [jwt]);
+  }, [jwt]);  
 
   if (!user) return <h1>Loading...</h1>;
 
@@ -33,6 +35,12 @@ export default function Home() {
       >
         Logout
       </button>
+
+      {user.role === "librarian" ? (
+        <LibrarianDashboard />
+      ) : (
+        <MemberDashboard />
+      )}
     </div>
   );
 }
